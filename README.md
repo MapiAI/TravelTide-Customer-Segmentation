@@ -1,3 +1,11 @@
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
+![SQL](https://img.shields.io/badge/SQL-PostgreSQL-blue?logo=postgresql)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-purple?logo=pandas)
+![Scikit-learn](https://img.shields.io/badge/Scikit--Learn-Clustering-orange?logo=scikit-learn)
+![Spark](https://img.shields.io/badge/Apache%20Spark-Data%20Processing-orange?logo=apachespark)
+![CRISP-DM](https://img.shields.io/badge/Methodology-CRISP--DM-success)
+![Status](https://img.shields.io/badge/Project-Academic%20Case%20Study-lightgrey)
+
 # ✈️ TravelTide – Customer Segmentation & Perk Strategy
 
 This repository contains an end-to-end customer segmentation project developed as part of a **MasterSchool Data Science program**.
@@ -17,6 +25,9 @@ This project:
 - defines a **transparent segmentation framework** based on behavioral dimensions,
 - assigns **exactly one perk per user** through explicit eligibility and priority rules,
 - and validates the segmentation logic using **unsupervised clustering**.
+
+The final output of the project is a user-level dataset ready for activation,
+where each user is assigned exactly one perk based on interpretable behavioral logic.
 
 ---
 
@@ -43,6 +54,9 @@ The project follows the **CRISP-DM framework**, adapted to a decision-oriented a
 
 6. **Deployment / Recommendations**  
    Translate findings into actionable, risk-controlled business recommendations.
+
+Each CRISP-DM phase is implemented in a dedicated notebook, resulting in a
+multi-notebook analytical pipeline designed to mirror a real-world data science workflow.
 
 ---
 
@@ -123,3 +137,11 @@ TravelTide/
 ├── .gitignore
 ├── LICENSE
 └── README.md
+
+---
+
+> **Note**  
+> The database credentials used in the notebooks belong to a public,
+> read-only educational PostgreSQL database provided as part of the MasterSchool program
+> and are included solely to ensure reproducibility in an academic context.
+
