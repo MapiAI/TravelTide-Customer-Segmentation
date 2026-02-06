@@ -117,15 +117,33 @@ The resulting clusters naturally reproduce the same underlying dimensions
 **Clustering is used for validation, not for decision-making.**
 
 ---
+## 📓 Execution Notes (Databricks & Colab)
+
+This project can be executed both in **Databricks** and in **Google Colab**.
+
+All notebooks are Colab-compatible.  
+However, **Notebook 02 – Data Understanding & SQL Exploration** interacts directly with large raw database tables (e.g. `sessions` ~5.4M rows).  
+For this reason, in Colab it is designed to support a lightweight “quick-run” flow:
+
+- **Run only the first two code cells** to execute the cohort selection + session-level extraction query and **export the resulting dataset to CSV**.
+- That exported CSV becomes the input for **Notebook 03**, allowing the rest of the pipeline to run end-to-end in Colab.
+
+The remainder of Notebook 02 is intentionally kept as a **fully documented SQL exploration and validation notebook**: it examines the database structure, relationships, and lifecycle logic (booking vs browsing vs cancellations), providing a detailed rationale for the cohort definition and the session-level dataset design.
+
+For convenience and reproducibility, the SQL queries used in Notebook 02 are also collected here:
+- [`scripts/sql/session_level_data_understanding.sql`](scripts/sql/session_level_data_understanding.sql)
+
+---
 
 ## 📁 Repository Structure
 
 ```text
 TravelTide/
 │
-├── notebooks/
-│   └── databricks/          # Databricks notebooks (full analytical pipeline)
-│
+├── notebooks/               
+│   └── *.ipynb              # Databricks notebooks (full analytical pipeline) 
+│   └── colab/               # Google Colab–compatible notebooks           
+│                            # (Notebook 02 supports a quick-run mode for large SQL queries)
 ├── data/
 │   ├── raw/                 # Raw CSV files extracted from the database
 │   ├── intermediate/        # Cleaned and feature-engineered datasets used for segmentation and modeling
@@ -137,7 +155,7 @@ TravelTide/
 ├── .gitignore
 ├── LICENSE
 └── README.md
-
+```
 ---
 
 > **Note**  
