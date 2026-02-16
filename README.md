@@ -71,6 +71,8 @@ Users are segmented through a **rule-based, interpretable framework** built arou
 - **Trip Complexity** – itinerary structure, duration, distance, group size
 - **Engagement** – behavioral intensity (RFM signals)
 
+A lightweight fallback rule ensures full coverage by assigning any remaining users who do not match the primary behavioral patterns to a simple, interpretable segment.
+
 These dimensions are intentionally **orthogonal** and reflect real decision frictions in travel planning.
 
 ---
@@ -85,6 +87,8 @@ Each user is assigned **exactly one perk** through:
 - lifecycle guardrails (e.g. completed trips),
 - and a **priority-based decision framework**.
 
+A fallback rule ensures that users who do not meet any primary eligibility pattern still receive a consistent, business‑aligned perk assignment.
+
 Perks include:
 
 - No Cancellation Fees  
@@ -93,7 +97,22 @@ Perks include:
 - Exclusive Discount  
 - Free Hotel Meal  
 
-The assignment logic is fully transparent and auditable.
+The assignment logic is fully transparent and auditable.  
+
+---
+
+## ✅ Validation Checks
+
+A final validation block is implemented at the end of **Notebook 05**, ensuring that the user‑level dataset is complete, consistent, and activation‑ready.
+
+The validation confirms that:
+
+- each user receives **exactly one perk**,  
+- no duplicate `user_id` values exist,  
+- no null or unexpected perk assignments occur (including fallback users),  
+- the fallback share is explicitly monitored.
+
+These checks guarantee that the perk assignment logic is correct, auditable, and ready for downstream activation or experimentation.
 
 ---
 
@@ -133,6 +152,10 @@ The remainder of Notebook 02 is intentionally kept as a **fully documented SQL e
 For convenience and reproducibility, the SQL queries used in Notebook 02 are also collected here:
 - [`scripts/sql/session_level_data_understanding.sql`](scripts/sql/session_level_data_understanding.sql)
 
+> **Performance Note**
+> Notebook 02 and Notebook 03 contain extensive SQL exploration and large rendered outputs.
+> When viewed directly on GitHub, they may load slowly due to the volume of visualizations and result tables.
+
 ---
 
 ## 📁 Repository Structure
@@ -156,6 +179,42 @@ TravelTide/
 ├── LICENSE
 └── README.md
 ```
+---
+## 📦 Requirements
+
+A minimal `requirements.txt` is included to support reproducibility.
+
+To install dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+The project uses standard data science libraries such as:
+
+- pandas  
+- numpy  
+- scikit-learn  
+- matplotlib / seaborn  
+- plotly  
+- scipy  
+- python-dotenv
+  
+---
+
+## 🔐 Environment Variables
+
+Database credentials are **not stored** in the repository.
+
+To run the extraction step, create a `.env` file in the project root:
+
+```
+TRAVELTIDE_DB_PASSWORD=your_password_here
+```
+The `.env` file is excluded via `.gitignore`.
+
+If no credentials are available, the **Colab version** can be reviewed end‑to‑end using pre‑executed outputs.
+
 ---
 
 > **Note**  
