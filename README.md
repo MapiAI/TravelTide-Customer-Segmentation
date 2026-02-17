@@ -270,8 +270,3 @@ If no credentials are available, the **Colab version** can be reviewed endâ€‘toâ
 
 ---
 
-> **Note**  
-> The database credentials used in the notebooks belong to a public,
-> read-only educational PostgreSQL database provided as part of the MasterSchool program
-> and are included solely to ensure reproducibility in an academic context.
-
