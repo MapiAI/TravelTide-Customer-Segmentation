@@ -122,7 +122,14 @@ Perks include:
 - Exclusive Discount  
 - Free Hotel Meal  
 
-The assignment logic is fully transparent and auditable.  
+The assignment logic is fully transparent and auditable. 
+
+The framework achieves full population coverage:
+
+- **96.4%** of users assigned via explicit behavioral logic  
+- **3.6%** assigned through a controlled fallback mechanism  
+
+This ensures deterministic assignment without leaving edge cases unresolved.
 
 ---
 
