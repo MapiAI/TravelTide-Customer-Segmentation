@@ -16,8 +16,11 @@ The objective is to design a **behavior-driven, risk-aware perk strategy** for a
 
 ## 📌 Project Overview
 
-TravelTide is a young travel-booking platform operating in a short historical window.  
-The business goal is to improve **conversion and retention** by offering **personalized perks** that address real user frictions rather than generic discounts.
+TravelTide is a young travel-booking platform operating in a short historical window.
+
+The business goal is to increase rewards program sign-ups by emphasizing the perk each customer is most likely to value in invitation emails.
+
+Rather than offering generic discounts, the objective is to address real behavioral frictions in travel planning through personalized incentives.
 
 This project:
 
@@ -28,6 +31,26 @@ This project:
 
 The final output of the project is a user-level dataset ready for activation,
 where each user is assigned exactly one perk based on interpretable behavioral logic.
+
+---
+
+## 🎯 Alignment with Campaign Design
+
+The analysis is strictly aligned with the original campaign objective.
+
+The business proposed the following perks:
+
+- No Cancellation Fees  
+- Free Checked Bag  
+- 1 Free Hotel Night with Flight  
+- Exclusive Discount  
+- Free Hotel Meal  
+
+Behavioral segmentation and feature engineering were designed to evaluate whether distinct user groups naturally aligned with these incentives.
+
+The multi-layer segmentation framework provided strong coverage across user behavior patterns, and no additional perks were required to meaningfully differentiate customers.
+
+This indicates that the proposed reward structure is behaviorally well-calibrated to the observed customer base.
 
 ---
 
@@ -71,9 +94,11 @@ Users are segmented through a **rule-based, interpretable framework** built arou
 - **Trip Complexity** – itinerary structure, duration, distance, group size
 - **Engagement** – behavioral intensity (RFM signals)
 
-A lightweight fallback rule ensures full coverage by assigning any remaining users who do not match the primary behavioral patterns to a simple, interpretable segment.
+These dimensions are intentionally orthogonal and reflect real decision frictions in travel planning.
 
-These dimensions are intentionally **orthogonal** and reflect real decision frictions in travel planning.
+The orthogonality of these dimensions ensures that segmentation is not driven by overlapping signals or redundant metrics, but by distinct behavioral axes capturing independent travel decision frictions.
+
+A lightweight fallback rule guarantees full population coverage while preserving interpretability.
 
 ---
 
@@ -112,30 +137,50 @@ The validation confirms that:
 - no null or unexpected perk assignments occur (including fallback users),  
 - the fallback share is explicitly monitored.
 
-These checks guarantee that the perk assignment logic is correct, auditable, and ready for downstream activation or experimentation.
+Together, these controls ensure that the final dataset is deterministic, auditable, and directly usable for campaign activation or experimentation without additional post-processing.
 
 ---
 
 ## 🔍 Clustering as Validation (Not Decision-Making)
 
-Unsupervised clustering is applied **after** segmentation and perk assignment.
+Unsupervised clustering is applied *after* rule-based segmentation and perk assignment.
+
+Its purpose is not to generate segments, but to validate whether meaningful behavioral structure exists in the raw data.
 
 Clustering:
 
-- uses **only raw behavioral features**,
-- excludes all engineered scores, tiers, rules, and perk labels,
-- does **not** influence business decisions.
+- uses only raw behavioral features,
+- excludes engineered tiers, rules, and perk labels,
+- does not influence business decisions,
+- serves purely as structural validation.
 
-Its purpose is to answer one question:
+The key question addressed is:
 
-> *Does the rule-based segmentation reflect real structure in the data?*
+> Does the rule-based segmentation reflect real structure in the underlying behavioral feature space?
 
-The resulting clusters naturally reproduce the same underlying dimensions  
-(**Value, Risk, Complexity, Engagement**), providing strong ex-post validation.
+K-Means clustering (k=4) yields a Silhouette score of **0.467**, indicating meaningful separation in customer travel behavior.
 
-**Clustering is used for validation, not for decision-making.**
+The resulting clusters naturally reproduce the same core behavioral dimensions  
+(Value, Risk, Trip Complexity, Engagement), providing strong ex-post confirmation of the segmentation framework.
+
+Clustering is therefore used to test structural coherence, not to drive decision logic.
 
 ---
+
+## 🔍 Segmentation Robustness
+
+The robustness of the framework is supported by:
+
+- Explicit behavioral rule definitions
+- Structural validation through unsupervised clustering (Silhouette score: 0.467)
+- Full population coverage with controlled fallback
+- Deterministic one-perk-per-user assignment
+- Clear separation between decision logic and validation logic
+
+Clustering is used to verify the existence of meaningful structure in raw behavioral features, not to drive business decisions.
+
+---
+
 ## 📓 Execution Notes (Databricks & Colab)
 
 This project can be executed both in **Databricks** and in **Google Colab**.
@@ -178,6 +223,7 @@ TravelTide/
 ├── .gitignore
 ├── LICENSE
 └── README.md
+└── requirements.txt
 ```
 ---
 ## 📦 Requirements
