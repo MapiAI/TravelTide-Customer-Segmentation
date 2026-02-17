@@ -266,7 +266,7 @@ TRAVELTIDE_DB_PASSWORD=your_password_here
 ```
 The `.env` file is excluded via `.gitignore`.
 
-If no credentials are available, the **Colab version** can be reviewed end‑to‑end using pre‑executed outputs.
+If database credentials are not available, the project can still be reviewed end-to-end using the pre-executed outputs included in the notebooks.
 
 ---
 
